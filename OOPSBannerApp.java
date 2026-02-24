@@ -26,7 +26,7 @@ public class OOPSBannerApp {
         String S6 = "       * ";
         String S7 = " ******  ";
 
-        // Create String array for banner lines
+        
         String[] banner = new String[7];
 
         banner[0] = String.join(" ", O1, O1, P1, S1);
@@ -37,7 +37,7 @@ public class OOPSBannerApp {
         banner[5] = String.join(" ", O6, O6, P6, S6);
         banner[6] = String.join(" ", O7, O7, P7, S7);
 
-        // Loop to print banner
+        
         for (String line : banner) {
             System.out.println(line);
         }
