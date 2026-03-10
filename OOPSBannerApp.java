@@ -1,55 +1,92 @@
 public class OOPSBannerApp {
 
-    public static void main(String[] args) {
+    static class CharacterPatternMap {
 
-        String[] banner = {
-                String.join("  ", getOPattern()[0], getOPattern()[0], getPPattern()[0], getSPattern()[0]),
-                String.join("  ", getOPattern()[1], getOPattern()[1], getPPattern()[1], getSPattern()[1]),
-                String.join("  ", getOPattern()[2], getOPattern()[2], getPPattern()[2], getSPattern()[2]),
-                String.join("  ", getOPattern()[3], getOPattern()[3], getPPattern()[3], getSPattern()[3]),
-                String.join("  ", getOPattern()[4], getOPattern()[4], getPPattern()[4], getSPattern()[4]),
-                String.join("  ", getOPattern()[5], getOPattern()[5], getPPattern()[5], getSPattern()[5]),
-                String.join("  ", getOPattern()[6], getOPattern()[6], getPPattern()[6], getSPattern()[6])
-        };
+        private char character;
+        private String[] pattern;
 
-        for (String line : banner) {
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
+        }
+    }
+
+    public static String[] getCharacterPattern(CharacterPatternMap[] patterns, char ch) {
+        for (CharacterPatternMap map : patterns) {
+            if (map.getCharacter() == ch) {
+                return map.getPattern();
+            }
+        }
+        return null;
+    }
+
+    public static void printBanner(String text, CharacterPatternMap[] patterns) {
+
+        int height = 7;
+
+        for (int i = 0; i < height; i++) {
+
+            StringBuilder line = new StringBuilder();
+
+            for (char ch : text.toCharArray()) {
+
+                String[] pattern = getCharacterPattern(patterns, ch);
+
+                if (pattern != null) {
+                    line.append(pattern[i]).append("  ");
+                }
+            }
+
             System.out.println(line);
         }
     }
 
-    public static String[] getOPattern() {
-        return new String[]{
-                "  *****  ",
-                " *     * ",
-                "*       *",
-                "*       *",
-                "*       *",
-                " *     * ",
-                "  *****  "
-        };
-    }
+    public static void main(String[] args) {
 
-    public static String[] getPPattern() {
-        return new String[]{
-                " ******  ",
-                " *     * ",
-                " *     * ",
-                " ******  ",
-                " *       ",
-                " *       ",
-                " *       "
+        String[] O = {
+                " ***** ",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                " ***** "
         };
-    }
 
-    public static String[] getSPattern() {
-        return new String[]{
-                "  *****  ",
-                " *     * ",
-                " *       ",
-                "  *****  ",
-                "       * ",
-                " *     * ",
-                "  *****  "
+        String[] P = {
+                "****** ",
+                "*     *",
+                "*     *",
+                "****** ",
+                "*      ",
+                "*      ",
+                "*      "
         };
+
+        String[] S = {
+                " ***** ",
+                "*      ",
+                "*      ",
+                " ***** ",
+                "      *",
+                "      *",
+                " ***** "
+        };
+
+        CharacterPatternMap[] patterns = {
+                new CharacterPatternMap('O', O),
+                new CharacterPatternMap('P', P),
+                new CharacterPatternMap('S', S)
+        };
+
+        printBanner("OOPS", patterns);
     }
 }
